@@ -1,0 +1,22 @@
+<html>
+<head>
+    <link href="style.css" rel="stylesheet" />
+    <script type="module">
+        import {start} from './index.js';
+        let canvas = document.getElementById('canvas');
+        let image = document.getElementById('ball');
+        let baa = document.getElementById("baa");
+        let ohNo = document.getElementById("oh-no");
+        let boing = document.getElementById("boing");
+        start(canvas, {image, baa, ohNo, boing});
+    </script>
+</head>
+<body>
+    <img id="ball" src="asset/sheep.png" />
+    <audio id="baa"><source src="asset/baa.mp3" /></audio>
+    <audio id="oh-no"><source src="asset/oh-no.mp3" /></audio>
+    <audio id="boing"><source src="asset/boing.mp3" /></audio>
+
+    <canvas id="canvas" width="800" height="600" />
+</body>
+</html>
