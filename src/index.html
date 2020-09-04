@@ -4,19 +4,22 @@
     <script type="module">
         import {start} from './index.js';
         let canvas = document.getElementById('canvas');
-        let image = document.getElementById('ball');
+        let image = document.getElementById('sheep');
         let baa = document.getElementById("baa");
         let ohNo = document.getElementById("oh-no");
         let boing = document.getElementById("boing");
-        start(canvas, {image, baa, ohNo, boing});
+        let doing = document.getElementById("doing");
+        start(canvas, {image, baa, ohNo, boing, doing});
     </script>
 </head>
 <body>
-    <img id="ball" src="asset/sheep.png" />
+    <img id="sheep" src="asset/sheep.png" />
+    <img id="field" src="asset/field.png" />
     <audio id="baa"><source src="asset/baa.mp3" /></audio>
     <audio id="oh-no"><source src="asset/oh-no.mp3" /></audio>
     <audio id="boing"><source src="asset/boing.mp3" /></audio>
+    <audio id="doing"><source src="asset/doing.mp3" /></audio>
 
-    <canvas id="canvas" width="800" height="600" />
+    <canvas id="canvas" width="800" height="800" />
 </body>
 </html>

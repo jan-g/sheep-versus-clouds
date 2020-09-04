@@ -8,7 +8,7 @@ export default class Ball {
 
         this.maxV = 300;
         this.gravity = 200;
-        this.bounce = 15;
+        this.bounceY = 15;
 
         this.angle = Math.random() * 2 * Math.PI;
         this.spin = Math.random() * 2 * Math.PI;
@@ -16,22 +16,24 @@ export default class Ball {
         this.position = {
             x: game.canvas.width / 2,
             y: Math.random() * game.canvas.height * 0.5 + this.height * 0.6,
+            r: this.width / 2,
         };
+
         this.velocity = {
             x: (Math.random() * 2 - 1) * this.maxV,
             y: 0,
-        }
+        };
 
         this.bounds = {
             x: { min: this.width / 2, max: game.canvas.width - this.width / 2, },
             y: { min: this.height / 2, max: game.canvas.height + this.height, },
-        }
+        };
         this.alive = false;
     }
 
     fire(position) {
         this.alive = true;
-        this.position = {...position, y: this.bounds.y.max};
+        this.position = {...this.position, ...position, y: this.bounds.y.max};
         this.velocity = {
             x: (Math.random() * 2 - 1) * this.maxV,
             y: (Math.random() * -3) * this.maxV,
@@ -82,7 +84,8 @@ export default class Ball {
         ) {
                 // Bounce!
                 this.position.y -= this.velocity.y * dt;
-                this.velocity.y = -this.velocity.y - this.bounce;
+                this.velocity.y = -this.velocity.y - this.bounceY;
+                this.velocity.x = clamp(-this.maxV, this.maxV, this.velocity.x + this.paddle.velocity.x * (Math.random() / 2 + 0.3));
                 this.spin += 2 * Math.PI;
                 this.assets.baa.currentTime = 0;
                 this.assets.baa.play();
@@ -94,4 +97,39 @@ export default class Ball {
             this.assets.ohNo.play();
         }
     }
+
+    bounce({dx, dy}) {
+        let {x, y} = this.velocity;
+        const [px, py] = [dy, -dx];     // perpendicular normal
+
+        // console.log("normal", dx, dy, "r=", Math.sqrt(dx * dx + dy * dy));
+        // console.log("perp", px, py, "r=", Math.sqrt(px * px + py * py));
+        this.assets.doing.currentTime = 0;
+        this.assets.doing.play();
+
+        // Work out velocity components
+        const perpR = x * px + y * py;
+        const alongR = x * dx + y * dy;
+        // console.log("my velocity", x, y, "r=", Math.sqrt(x * x + y * y));
+
+        // Bounce that sucker
+        const [alongX, alongY] = [alongR * dx, alongR * dy];
+        const [perpX, perpY] = [perpR * px, perpR * py];
+
+        // console.log("component of velocity along normal = ", alongX, alongY, "r=", Math.sqrt(alongX * alongX + alongY * alongY));
+        // console.log("component of velocity along perp = ", perpX, perpX, "r=", Math.sqrt(perpX * perpX + perpY * perpY));
+
+        x = -alongX + perpX;
+        y = -alongY + perpY;
+
+        // console.log("my new velocity", x, y, "r=", Math.sqrt(x * x + y * y));
+        // console.stopThis();
+
+        this.velocity.x = x;
+        this.velocity.y = y;
+    }
+}
+
+function clamp(lower, upper, value) {
+    return Math.max(lower, Math.min(upper, value));
 }
