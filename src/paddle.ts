@@ -1,4 +1,18 @@
+interface vec<T> {x: T, y: T};
+interface acc<T> {x: {left: T, right: T}, y: {up: T, down: T}};
+interface bound {min: number, max: number};
+
 export default class Paddle {
+    width: number;
+    height: number;
+    position: vec<number>;
+    velocity: vec<number>;
+    acceleration: acc<number>;
+    game: any;
+    bounds: vec<bound>;
+    deltaV: number;
+    maxV: number;
+    fadeV: number;
 
     constructor(game) {
         this.game = game;
@@ -13,8 +27,8 @@ export default class Paddle {
             y: 0,
         }
         this.acceleration = {
-            x: {left: false, right: false},
-            y: {up: false, down: false},
+            x: {left: 0, right: 0},
+            y: {up: 0, down: 0},
         }
 
         this.bounds = {

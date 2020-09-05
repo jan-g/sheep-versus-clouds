@@ -9,7 +9,7 @@ export function start(canvas, assets) {
 
     lastTime = 0;
     requestAnimationFrame(gameLoop);
-    gameLoop();
+    gameLoop(0);
 }
 
 let lastTime;

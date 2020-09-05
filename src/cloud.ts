@@ -1,4 +1,16 @@
+interface bounds {x: {min: number, max: number}, y: {min: number, max: number}};
+interface vec {x: number, y: number};
+
 export default class Cloud {
+    width: number;
+    height: number;
+    alive: boolean;
+    dying: number;
+    bounds: bounds;
+    position: vec;
+    velocity: vec;
+    circles: any[];
+
     constructor(game) {
         this.width = 80;
         this.height = 40;

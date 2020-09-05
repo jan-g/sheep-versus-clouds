@@ -1,5 +1,26 @@
+import Paddle from './paddle';
+import Game from './game';
+
+interface position {x: number, y: number, r: number};
+interface vec<T> {x: T, y: T};
+interface bound {min: number, max: number};
+
 export default class Ball {
-    constructor(game, assets) {
+    paddle: Paddle;
+    assets: any;
+    width: number;
+    height: number;
+    maxV: number;
+    gravity: number;
+    bounceY: number;
+    angle: number;
+    spin: number;
+    position: position;
+    velocity: vec<number>;
+    bounds: vec<bound>;
+    alive: boolean;
+
+    constructor(game: Game, assets) {
         this.paddle = game.paddle;
         this.assets = assets;
 

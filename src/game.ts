@@ -5,9 +5,19 @@ import Cloud from "./cloud.js";
 import Backdrop from "./backdrop.js";
 
 export default class Game {
+    backdrop: Backdrop;
+    paddle: Paddle;
+    input: InputHandler;
+    balls: Ball[];
+    assets: object;
+    clouds: Cloud[];
+    won: boolean;
+    canvas: HTMLCanvasElement;
+
     constructor(canvas, assets) {
         this.canvas = canvas;
         this.assets = assets;
+
         this.start();
     }
 

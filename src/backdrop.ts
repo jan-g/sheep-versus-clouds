@@ -1,4 +1,6 @@
 export default class Backdrop {
+    canvas: HTMLCanvasElement;
+    hills: any[];
 
     constructor(game) {
         this.canvas = document.createElement("canvas");

@@ -2,19 +2,18 @@
 <head>
     <link href="style.css" rel="stylesheet" />
     <script type="module">
-        import {start} from './index.js';
+        import * as S from './index.js';
         let canvas = document.getElementById('canvas');
         let image = document.getElementById('sheep');
         let baa = document.getElementById("baa");
         let ohNo = document.getElementById("oh-no");
         let boing = document.getElementById("boing");
         let doing = document.getElementById("doing");
-        start(canvas, {image, baa, ohNo, boing, doing});
+        S.start(canvas, {image, baa, ohNo, boing, doing});
     </script>
 </head>
 <body>
     <img id="sheep" src="asset/sheep.png" />
-    <img id="field" src="asset/field.png" />
     <audio id="baa"><source src="asset/baa.mp3" /></audio>
     <audio id="oh-no"><source src="asset/oh-no.mp3" /></audio>
     <audio id="boing"><source src="asset/boing.mp3" /></audio>
